@@ -24,8 +24,6 @@ RUN apt-get update && \
 # Make ssh dir
 RUN mkdir /root/.ssh/
 
-COPY run.sh /run.sh
-
 ENV HOME /home/nors
 ENV NORS_PATH $HOME/nors-server
 ENV NORS_REPO https://github.com/dmazzer/nors-server.git
@@ -47,7 +45,9 @@ RUN git clone $NORS_REPO $NORS_PATH
 WORKDIR $NORS_PATH
 RUN git checkout $NORS_BRANCH
 
-COPY nors.conf $NORS_PATH/nors.conf
 RUN sudo pip3 install -r requirements.txt
+
+COPY nors.conf $NORS_PATH/nors.conf
+COPY run.sh /run.sh
 
 ENTRYPOINT ["/run.sh"]
