@@ -8,8 +8,6 @@ services:
       - mongodb
   mongodb:
     build: mongodb
-    ports: 
-      - "27017:27017"
     volumes:
       - /opt/nors/db:/data/db
       - /opt/nors/configdb:/data/configdb
